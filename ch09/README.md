@@ -63,3 +63,21 @@ const vector<int> v2;
 auto it1 = v1.begin(), it2 = v2.begin();
 auto it3 = v1.cbegin(), it4 = v2.cbegin();
 ```
+以上这段代码在clang++(MacOS X version 10+)中会报错:
+```cpp
+exercise9_10_fs.cpp:9:5: error: 'auto' deduced as 'std::__1::__wrap_iter<int *>' in declaration of 'it1' and deduced as 'std::__1::__wrap_iter<const int *>'
+      in declaration of 'it2'
+    auto it1 = v1.begin(), it2 = v2.begin();
+```
+大概意思就是说`auto`这个隐式转换符号将it1推导为`std::__1::__wrap_iter<int *>`类型，但是将it2推导为`std::__1::__wrap_iter<const int *>`类型，`auto`必须始终推导为同一类型。所以我们将代码改为:
+```cpp
+    vector<int> v1;
+    const vector<int> v2;
+
+    auto it1 = v1.begin();
+    auto it2 = v2.begin();
+    auto it3 = v1.cbegin(), it4 = v2.cbegin();
+```
+这样就不会报错了。
+`it1`是`vector<int>::iterator`
+`it2`、`it3`、`it4`是`vector<int>::const_iterator`
