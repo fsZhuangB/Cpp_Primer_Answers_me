@@ -1,1 +1,2 @@
-# Cpp_Primer_Answers_me
+# 我自己的cpp primer练习
+精读c++ primer 5th，由于以前读的时候做的练习基本都丢失了，现在想好好保存，做个参考
