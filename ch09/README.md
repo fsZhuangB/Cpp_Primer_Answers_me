@@ -126,3 +126,10 @@ vector<int> ivc(5, 5);
 vector<double> dvc(ilst.begin(), ilst.end());
 vector<double> dvc2(ivc.begin(), ivc.end());
 ```
+
+## 练习9.14
+```cpp
+list<const char*> l{"foo", "bar"};
+vector<string> v;
+v.assign(l.cbegin(), l.cend());
+```
