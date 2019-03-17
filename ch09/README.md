@@ -81,3 +81,48 @@ exercise9_10_fs.cpp:9:5: error: 'auto' deduced as 'std::__1::__wrap_iter<int *>'
 这样就不会报错了。
 `it1`是`vector<int>::iterator`
 `it2`、`it3`、`it4`是`vector<int>::const_iterator`
+
+## 练习9.11
+```cpp
+#include <vector>
+#include <string>
+/* 默认构造函数，初始化一个空的int类型的vector */
+vector<int> v1;  
+
+/* 拷贝初始化，v2初始化为v1的拷贝 */
+vector<int> v2(v1);
+vector<int> v2 = v1;
+
+/* 列表初始化 */
+/* vector初始化为列表中string元素的拷贝 */
+vector<string> v3{ "foo", "bar", "good" };
+vector<string> v3 = { "foo", "bar", "good" };
+
+/* 迭代器范围初始化 */
+vector<string>::iterator b = v3.begin();
+vector<string>::iterator e = v3.end();
+// v4 初始化为迭代器b, e中范围的拷贝
+vector<string> v4(b, e); 
+// v5将const char*元素转换为string
+vector<const char*> v5(b, e);
+
+/* 值初始化 */
+// 将vector大小初始化为10
+vector<int> v6(10);
+
+// 将vector初始化为10个值为"foo"的元素
+vector<string> v7(10, "foo")
+```
+
+## 练习9.12
+- 对于接受一个容器创建其拷贝的构造函数，其容器类型和元素类型必须都要相同
+- 对于接受两个迭代器创建拷贝的构造函数，其容器类型和元素类型可以不同，但是元素类型必须能够进行类型转换
+
+## 练习9.13
+```cpp
+list<int> ilst(5, 4);
+vector<int> ivc(5, 5);
+
+vector<double> dvc(ilst.begin(), ilst.end());
+vector<double> dvc2(ivc.begin(), ivc.end());
+```
