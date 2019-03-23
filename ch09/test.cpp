@@ -8,10 +8,12 @@ using namespace std;
 
 int main()
 {
-
-    vector<const char*> oldstyle{"foo", "bar"};
-    list<string> names;
-    oldstyle.assign(names.cbegin(), names.cend());
-
+    list<string> lst;
+    string word;
+    auto iter = lst.begin();
+    while (cin >> word)
+        iter = lst.insert(iter, word);
+    for (auto i : lst)
+        cout << i;
     return 0;
 }
