@@ -53,5 +53,15 @@ void StrBlob::pop_back()
     data->pop_back();
 }
 
+int main()
+{
+    int * pi = new int;
+    std::string *ps = new std::string(10, '9');  // 此处要使用''
+    std::vector<int> *pv = new std::vector<int>{0, 1, 2, 3, 4, 5};
 
+    auto p1 = new auto(20);
+    auto p2 = new auto("good");
+    const int *pci = new const int(1024);
+
+}
 
