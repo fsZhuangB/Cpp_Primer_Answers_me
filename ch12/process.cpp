@@ -1,21 +1,20 @@
 #include <memory>
+#include <iostream>
 using namespace std;
 
 void process(shared_ptr<int> ptr)
 {
     *ptr = 42;
+    cout << *ptr << endl;
 }
 
 int main()
 {
-    shared_ptr<int> p(new int(43));  // 引用计数为1
-    int *x = new int(1024);
-    shared_ptr<int> p2;
-    process(p2);
-    int i = *p;
-
-    // p2是一个空悬指针！
-    int j = *p2;
-
+    auto p = new int();
+    auto sp = make_shared<int>();
+    process(shared_ptr<int>(p));
+    int *foo = p;
+    cout << *foo << endl;
+  
     return 0;
 }
