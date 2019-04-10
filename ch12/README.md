@@ -101,6 +101,6 @@ auto sp = make_shared<int>();
 auto p = sp.get();
 delete p;
 ```
-sp是一个未初始化的`shared_ptr`，同时sp也将p初始化为一个指向int类型的内置指针，释放p之后，sp所指向的空间不复存在，sp将会成为野指针。
+ 
 
 
