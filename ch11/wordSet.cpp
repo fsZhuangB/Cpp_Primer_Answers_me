@@ -2,18 +2,21 @@
 #include <set>
 #include <map>
 #include <string>
+#include <vector>
 using namespace std;
 
 int main()
 {
-    map<string, size_t> word_count;
-    set<string> exclude = {"The", "But", "And", "the", "but", "and"};
-    string word;
-    while (cin >> word)
-        if (exclude.find(word) == exclude.end())
-            ++word_count[word];
-    for (const auto &w:word_count)
-        cout << w.first << " " << w.second << endl;
+    vector<int> ivec;
+    for (vector<int>::size_type i = 0; i != 10; ++i)
+    {
+        ivec.push_back(i);
+        ivec.push_back(i);  // 每个数重复保持一次
+    }
 
-    return 0;
+    set<int> iset(ivec.cbegin(), ivec.cend());
+    multiset<int> miset(ivec.cbegin(), ivec.cend());
+    cout << ivec.size() << endl;
+    cout << iset.size() << endl;
+    cout << miset.size() << endl;
 }
