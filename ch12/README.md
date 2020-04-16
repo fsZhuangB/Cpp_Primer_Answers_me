@@ -20,8 +20,8 @@ b1、b2实际操作的是同一个vector，b1有4个元素，但在这段代码�
 
 > StrBlob 需要const 版本的push_back 和 pop_back吗？如需要，添加进去。否则，解释为什么不需要。
 
-不需要。`push_back` 和 `pop_back` 会改变对象的内容。而 const 对象是只读的，因此不需要。
-
+You can certainly do this if you want to, but there doesn't seem to be any logical reason. The compiler doesn't complain because this doesn't modify data (which is a pointer) but rather the thing data points to, which is perfectly legal to do with a const pointer.
+-- By David Schwartz
 ## 练习12.4
 
 > 在我们的 check 函数中，没有检查 i 是否大于0。为什么可以忽略这个检查？
