@@ -14,11 +14,14 @@ public:
 	// Your assignment operator should copy the object to which ps points
 	HasPtr& operator=(const HasPtr& hpr)
 	{
+        // copy the underlying string
+        // this is because we have to 
+        // handle the self-assignment condition
 		string* new_hasptr = new string(*hpr.ps);
-		delete ps;
-		ps = new_hasptr;
+		delete ps; // free the old memory
+		ps = new_hasptr; // copy data from hpr into this object
 		i = hpr.i;
-		return *this;
+		return *this;    // return this object 
 	}
 
 
