@@ -34,6 +34,10 @@ private:
 	int i;
 };
 
+// remember:
+// if we use synthesized copy constructor
+// this function will delete the same memory position twice
+// this may cause undefined behavior
 HasPtr f(HasPtr hp)
 {
 	HasPtr ret = hp;
