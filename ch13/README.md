@@ -155,6 +155,32 @@ private:
     int* i;
 };
 ```
+
+## 13.29
+这其实是3个不同的函数，参数类型不一样，所以不会导致递归循环。
+
+## 13.30
+```C++
+    friend void swap(HasPtr& lhs, HasPtr& rhs)
+    {
+        using std::swap;
+        swap(lhs.ps, rhs.ps);
+        swap(lhs.i, rhs.i);
+    }
+```
+## 13.31
+```c++
+bool operator<(const HasPtr &lhs, const HasPtr &rhs)
+{
+    return *lhs.ps < *rhs.ps;
+}
+```
+## 13.32
+不会。类值的版本利用swap交换指针不用进行内存分配，因此得到了性能上的提升。类指针的版本本来就不用进行内存分配，所以不会得到性能提升。
+
+
+
+
 ## Exercise 13.35:
 What would happen if Message used the synthesized versions of the copy-control members?
 some existing Folders will out of 'sync' with the Message after assignment.
