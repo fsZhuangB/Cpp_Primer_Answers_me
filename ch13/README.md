@@ -97,7 +97,63 @@ int numbered::unique = 10;
 void f(numbered s) {
     std::cout << s.mysn << std::endl;
 }
+```
 
+## 13.23
+在编写拷贝赋值运算符时，要注意两点：
+1. 防止自赋值，一个好的方法时在销毁左侧运算符对象之前拷贝右侧运算符对象。
+2. 大多数赋值运算符结合了析构函数和拷贝构造函数的工作。
+
+## 13.24
+会发生内存泄露。
+在下面这种情况下，会发生为定义的情况：
+```c++
+HasPtr f(HasPtr hp)
+{
+  HasPtr ret = hp;
+  return ret;
+}
+// ret和hp被销毁，一个指针被销毁两次
+```
+
+## 13.27
+```C++
+class HasPtr {
+public:
+    HasPtr(const string& s = string()) : ps(new string(s)), i(new int(1)) { }
+    HasPtr(HasPtr& hp) : ps(hp.ps), i(hp.i){
+        // 将该对象的引用计数指针指向被拷贝对象的引用计数所指向的位置
+        // 将引用计数加1
+        ++*i;
+    }
+    // 递增右侧，递减左侧
+    HasPtr& operator= (HasPtr& rhs)
+    {
+        ++*rhs.i;
+        // 递减被赋值对象的引用计数
+        if (--*i == 0)
+        {
+            delete ps;
+            delete i;
+        }
+        ps = rhs.ps;
+        i = rhs.i;
+        return *this;
+    }
+    ~HasPtr() {
+        // 可以将(*i)--优化一下
+        if (--*i == 0)
+        {
+            delete ps;
+            delete i;
+        }
+    }
+private:
+    // 共享的内存区域
+    string* ps;
+    // 引用计数
+    int* i;
+};
 ```
 ## Exercise 13.35:
 What would happen if Message used the synthesized versions of the copy-control members?

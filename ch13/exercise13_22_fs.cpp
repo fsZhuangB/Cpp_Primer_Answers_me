@@ -9,7 +9,13 @@ public:
 	// the constructor should dynamically allocate a new string
 	// and copy the object to which ps points, rather copying ps itself
 	HasPtr(const HasPtr& hpr) : ps(new string(*hpr.ps)), i(hpr.i) { }
-	
+//    HasPtr(HasPtr& hp) {
+        // 拷贝构造函数
+        // 为其分配新的空间
+//        string* newString = new string(*hp.ps);
+//        this->ps = newString;
+//        this->i = hp.i;
+//    }	
 
 	// Your assignment operator should copy the object to which ps points
 	HasPtr& operator=(const HasPtr& hpr)
