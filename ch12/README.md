@@ -45,6 +45,7 @@ bool b() {
 	return p;
 }
 ```
+要注意指针会被隐式转换为bool类型
 有错误，返回的指针会被隐式地转换为`bool`类型，导致p指向的内存无法被释放，会导致内存泄露(memory leakage)
 
 ## 练习12.9
@@ -102,6 +103,8 @@ auto sp = make_shared<int>();
 auto p = sp.get();
 delete p;
 ```
- 
+对get()返回的指针进行delete是错误的，智能指针 sp 所指向空间已经被释放，再对 sp 进行操作会出现错误。
+
+
 
 
