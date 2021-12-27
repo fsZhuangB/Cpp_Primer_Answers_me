@@ -105,6 +105,34 @@ delete p;
 ```
 对get()返回的指针进行delete是错误的，智能指针 sp 所指向空间已经被释放，再对 sp 进行操作会出现错误。
 
+## 练习12.14
+见文件
 
+## 练习12.15
+见文件
 
+## 练习12.16
+编译器报错为
+```c++
+error: call to implicitly-deleted copy constructor of 'std::__1::unique_ptr<int, std::__1::default_delete<int> >'
+```
+## 练习12.17
+```c++
+    int ix = 1024, *pi = &ix, *pi2 = new int(2048);
+    typedef unique_ptr<int> IntP;
+    IntP p0(ix);
+    IntP p1(pi);
+    IntP p2(pi2);
+    IntP p3(&ix);
+    IntP p4(new int(1048));
+    IntP p5(p2.get());
+```
+- p0定义不合法，必须将其绑定到一个new 返回的指针上
+- p1定义合法，但是当 `p1` 被释放时，`p1` 所指向的对象也被释放，所以导致 `pi` 成为一个空悬指针。在析构的时候，会报错：`malloc: *** error for object 0x7ffee59ff668: pointer being freed was not allocated`。
+- p2定义合法。但是也可能会使得 pi2 成为空悬指针。
+- p3定义不合法，当 p3 被销毁时，它试图释放一个栈空间的对象。
+- p4定义合法。
+- 不合法。p5 和 p2 指向同一个对象，当 p5 和 p2 被销毁时，会使得同一个指针被释放两次。
 
+## 练习12.18
+release 成员的作用是放弃控制权并返回指针，因为在某一时刻只能有一个 unique_ptr 指向某个对象，unique_ptr 不能被赋值，所以要使用 release 成员将一个 unique_ptr 的指针的所有权传递给另一个 unique_ptr。而 shared_ptr 允许有多个 shared_ptr 指向同一个对象，因此不需要 release 成员。
