@@ -178,7 +178,7 @@ bool operator<(const HasPtr &lhs, const HasPtr &rhs)
 ## 13.32
 不会。类值的版本利用swap交换指针不用进行内存分配，因此得到了性能上的提升。类指针的版本本来就不用进行内存分配，所以不会得到性能提升。
 
-
+## 
 
 
 ## Exercise 13.35:
