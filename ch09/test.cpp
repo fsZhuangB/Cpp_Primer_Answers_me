@@ -8,12 +8,15 @@ using namespace std;
 
 int main()
 {
-    list<string> lst;
-    string word;
-    auto iter = lst.begin();
-    while (cin >> word)
-        iter = lst.insert(iter, word);
-    for (auto i : lst)
-        cout << i;
+    // 将const char*转换为string
+    list<string> names;
+    vector<const char*> v {"hi", "jack"};;
+    names.assign(v.begin(), v.end());
+
+    for (auto& s : names)
+    {
+        cout << s << " ";
+    }
+
     return 0;
 }
