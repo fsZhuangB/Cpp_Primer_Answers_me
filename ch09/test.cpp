@@ -8,15 +8,25 @@ using namespace std;
 
 int main()
 {
-    // 将const char*转换为string
-    list<string> names;
-    vector<const char*> v {"hi", "jack"};;
-    names.assign(v.begin(), v.end());
+    int some_value = 4;
+    vector<int> iv{1, 4, 4, 9, 4, 5, 4};
 
-    for (auto& s : names)
+    vector<int>::iterator iter = iv.begin(),
+                          mid = iv.begin() + iv.size() / 2;
+    while (iter != mid)
     {
-        cout << s << " ";
-    }
+        if (*iter == some_value)
+        {
+            iter = iv.insert(iter, 2 * some_value);
+            ++iter;
+        }
+        ++iter;
+        mid = iv.begin() + iv.size() / 2;
 
+    }
+    for (auto& v : iv)
+    {
+        cout << v << " ";
+    }
     return 0;
 }

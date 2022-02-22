@@ -133,3 +133,35 @@ list<const char*> l{"foo", "bar"};
 vector<string> v;
 v.assign(l.cbegin(), l.cend());
 ```
+## 练习9.22
+这道题的错误在于循环是不会结束的，因为没有更新迭代器的位置，每次插入之后，元素后移，插入位置之后的迭代器将会失效，导致iter位置不更新，造成了死循环。
+更改做法：(该做法也会出问题，mid也会因为插入的影响而失效：)
+```cpp
+vector<int>::iterator iter = iv.begin(),
+					  mid = iv.begin() + iv.size() / 2;
+while (iter != mid)
+{
+    if (*iter == some_value)
+    {
+        iter = iv.insert(iter, 2 * some_value);
+        ++iter;
+    }
+    ++iter;
+}
+```
+
+应该每次也对mid进行重新赋值，如下所示：
+```cpp
+vector<int>::iterator iter = iv.begin(),
+					  mid = iv.begin() + iv.size() / 2;
+while (iter != mid)
+{
+    if (*iter == some_value)
+    {
+        iter = iv.insert(iter, 2 * some_value);
+        ++iter;
+    }
+    ++iter;
+    mid = vec.begin() + vec.size() / 2;
+}
+```
